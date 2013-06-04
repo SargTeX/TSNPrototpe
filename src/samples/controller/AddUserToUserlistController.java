@@ -25,7 +25,7 @@ public class AddUserToUserlistController extends Controller {
 	
 	@Override
 	public void save() {
-		this.userlist.addUser(user);
+		System.out.println("Hello World!");
 	}
 	
 }
