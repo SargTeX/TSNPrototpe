@@ -13,6 +13,8 @@ import samples.data.IInstallationCandidate;
  */
 public interface IDataModel extends IInstallationCandidate {
 	
+	public boolean exists();
+	
 	public void create() throws SQLException;
 	public void remove() throws SQLException;
 	public void read() throws SQLException;

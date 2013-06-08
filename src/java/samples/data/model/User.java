@@ -73,7 +73,12 @@ public class User implements IDataModel {
 		
 		if (rs.first()) {
 			existing = true;
-			
+			this.username = rs.getString("username");
+			this.password = rs.getString("password");
+			this.email = rs.getString("email");
+			this.birthday = rs.getInt("birthday");
+			this.prename = rs.getString("prename");
+			this.surname = rs.getString("surname");
 		}
 	}
 

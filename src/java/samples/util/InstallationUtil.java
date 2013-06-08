@@ -5,8 +5,13 @@
 package samples.util;
 
 import samples.data.IInstallationCandidate;
+import samples.data.model.Permission;
+import samples.data.model.PermissionValue;
 import samples.data.model.Session;
 import samples.data.model.User;
+import samples.data.model.UserToUserlist;
+import samples.data.model.Usergroup;
+import samples.data.model.Userlist;
 
 /**
  *
@@ -17,8 +22,13 @@ public class InstallationUtil {
 	//<editor-fold defaultstate="collapsed" desc="Attributes">
 	private static final String[] classes = new String[] {};
 	private static final IInstallationCandidate[] installationCandidates = new IInstallationCandidate[] {
+		new Permission(),
+		new PermissionValue(),
+		new Session(),
 		new User(),
-		new Session()
+		new UserToUserlist(),
+		new Usergroup(),
+		new Userlist()
 	};
 	//</editor-fold>
 	
