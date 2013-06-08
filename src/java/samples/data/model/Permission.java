@@ -66,8 +66,8 @@ public class Permission implements IDataModel {
 	public void install() throws Exception {
 		String query = "CREATE TABLE permission ("
 				+ "name VARCHAR( 255 ) NOT NULL PRIMARY KEY,"
-				+ "description TEXT DEFAULT '',"
-				+ "defaultValue TEXT DEFAULT '',"
+				+ "description TEXT,"
+				+ "defaultValue TEXT,"
 				+ "type VARCHAR( 255 ) NOT NULL)";
 		SqlDatabase.getInstance().execute(query);
 	}

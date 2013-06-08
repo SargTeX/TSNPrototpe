@@ -66,7 +66,7 @@ public class Usergroup implements IDataModel {
 		String query = "CREATE TABLE usergroup ("
 				+ "id INT ( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ "name VARCHAR( 255 ) NOT NULL,"
-				+ "description TEXT DEFAULT '',"
+				+ "description TEXT,"
 				+ "userlistId INT( 11 ) NOT NULL DEFAULT 0)";
 		SqlDatabase.getInstance().execute(query);
 	}

@@ -59,7 +59,7 @@ public class PermissionValue implements IDataModel {
 	public void install() throws Exception {
 		String query = "CREATE TABLE permission_value ("
 				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-				+ "value TEXT DEFAULT '',"
+				+ "value TEXT,"
 				+ "permission VARCHAR( 255 ) NOT NULL,"
 				+ "objectId INT( 11 ) NOT NULL,"
 				+ "objectType VARCHAR( 255 ) NOT NULL)";
