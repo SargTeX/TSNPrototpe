@@ -8,6 +8,18 @@
         <servlet-name>UserLoginController</servlet-name>
         <servlet-class>samples.controller.UserLoginController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>samples.controller.HomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserAddController</servlet-name>
+        <servlet-class>samples.controller.UserAddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InstallationController</servlet-name>
+        <servlet-class>samples.controller.InstallationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserToUserlistController</servlet-name>
         <url-pattern>/AddUserToUserlistController</url-pattern>
@@ -15,6 +27,18 @@
     <servlet-mapping>
         <servlet-name>UserLoginController</servlet-name>
         <url-pattern>/UserLoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/HomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserAddController</servlet-name>
+        <url-pattern>/UserAddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InstallationController</servlet-name>
+        <url-pattern>/InstallationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

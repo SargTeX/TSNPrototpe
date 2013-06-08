@@ -1,17 +1,49 @@
+(function($) {
+    $.fn.getAttributes = function() {
+        var attributes = {}; 
+
+        if( this.length ) {
+            $.each( this[0].attributes, function( index, attr ) {
+                attributes[ attr.name ] = attr.value;
+            } ); 
+        }
+
+        return attributes;
+    };
+})(jQuery);
+
 Theme('JQueryUITheme', {
 	
 	init: function() {
+		this.addElementParser('DIV', new DivElementParser());
 		this.addElementParser('FORM', new FormElementParser());
 		this.addElementParser('INPUT', new InputElementParser());
 		this.addElementParser('MENU', new MenuElementParser());
 	},
 	
 	affect: function(section) {
-		console.log("affect");
 		$.fn.formLabels();
 		$('.menu').menu();
+		$('a').click(function() {
+			var link = $(this).attr('href');
+			new ControllerRequest(link).execute();
+			return false;
+		});
+		$('form').ajaxForm();
 	}
 	
+});
+
+ElementParser('DivElementParser', {
+	getContent: function(element, subcontent) {
+		if (element.hasClass('--ui-generic')) return subcontent;
+		var content = "<div";
+		$.each($(element).getAttributes(), function(name, value) {
+			content += ' '+name+'="'+value+'"';
+		});
+		content += ">"+subcontent+"</div>";
+		return content;
+	}
 });
 
 ElementParser('FormElementParser', {
@@ -25,7 +57,9 @@ ElementParser('FormElementParser', {
 
 ElementParser('InputElementParser', {
 	getContent: function(element) {
-		var content = '<input type="'+element.attr('type')+'" name="'+element.attr('name')+'" title="'+element.attr('label')+'" />';
+		var content = '<input type="'+element.attr('type')+'" name="'+element.attr('name')+'" title="'+element.attr('label')+'"';
+		if (element.hasAttr('value'))  content += ' value="'+element.attr('value')+'"';
+		content += ' />';
 		
 		return content;
 	}

@@ -20,6 +20,7 @@ public abstract class Controller extends ServletController {
 	 */
 	private List<String> errorList = new ArrayList<String>();
 	private Map<String, String> templateSections = new HashMap<String, String>();
+	protected String method;
 	
 	protected void reset() {
 		this.templateVariables = new HashMap<String, Object>();
@@ -45,10 +46,10 @@ public abstract class Controller extends ServletController {
 		
 	}
 	
-	public <T> T getParam(String name, Class<T> classType) {
+	/*public <T> T getParam(String name, Class<T> classType) {
 		if (!this.hasParam(name)) return null;
 		return JsonUtil.getGson().fromJson(this.getParam(name), classType);
-	}
+	}*/
 	
 	public boolean hasParam(String name) {
 		return false;
@@ -56,6 +57,11 @@ public abstract class Controller extends ServletController {
 	
 	public Controller addError(String error) {
 		this.errorList.add(error);
+		return this;
+	}
+	
+	public Controller addError(Exception ex) {
+		this.errorList.add("exception "+ex.getClass().getCanonicalName()+" thrown: "+ex.getMessage());
 		return this;
 	}
 	
@@ -80,6 +86,27 @@ public abstract class Controller extends ServletController {
 	 */
 	public Controller setTemplate(String sectionName, String templateName) {
 		this.templateSections.put(sectionName, templateName);
+		return this;
+	}
+	
+	public Controller setMethod(String method) {this.method = method; return this;}
+	public String getMethod() {return this.method;}
+	
+	/**
+	 * Processes the request.
+	 */
+	@Override
+	public Controller processRequest() {
+		this.readParameters();
+		this.readData();
+		if (this.getMethod().equals("POST")) {
+			this.validate();
+			if (!this.hasError()) this.save();
+		}
+		this.assignVariables();
+		this.assignSections();
+		
+		// returns itself
 		return this;
 	}
 	

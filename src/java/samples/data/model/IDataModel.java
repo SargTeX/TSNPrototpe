@@ -5,13 +5,17 @@
 package samples.data.model;
 
 import java.sql.SQLException;
+import samples.data.IInstallationCandidate;
 
 /**
  *
  * @author SargTeX
  */
-public interface IDataModel {
+public interface IDataModel extends IInstallationCandidate {
 	
 	public void create() throws SQLException;
+	public void remove() throws SQLException;
+	public void read() throws SQLException;
+	public void update() throws SQLException;
 	
 }

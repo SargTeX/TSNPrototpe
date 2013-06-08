@@ -6,11 +6,17 @@ package samples.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import samples.data.model.Session;
+import samples.util.DebugUtil;
+import samples.util.IOUtil;
 
 /**
  *
@@ -43,19 +49,21 @@ public abstract class ServletController extends HttpServlet implements IControll
 		response.setContentType("text/html;charset=UTF-8");
 		
 		// save objects
+		this.reset();
 		this.request = request;
 		this.response = response;
-		this.reset();
+		this.setMethod(request.getMethod());
+		try {
+			Session.initialize(this.request.getSession().getId());
+		} catch (SQLException ex) {
+			this.addError("Could not initialize Session, exception: "+ex.getMessage());
+			DebugUtil.log(ex);
+		}
 		
 		// do lifecycle
-		// TODO sollte der controller-lifecycle nicht vom Controller vorgegeben werden?
-		this.readParameters();
-		this.readData();
-		this.validate();
-		if (!this.hasError()) this.save();
-		this.assignVariables();
-		this.assignSections();
+		this.processRequest();
 		
+		// do output
 		PrintWriter out = response.getWriter();
 		try {
 			out.print(this.getResponse());

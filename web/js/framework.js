@@ -1,3 +1,13 @@
+jQuery.fn.outerHTML = function(s) {
+    return s
+        ? this.before(s).remove()
+        : jQuery("<p>").append(this.eq(0).clone()).html();
+};
+
+jQuery.fn.hasAttr = function(name) {
+	return (this.attr(name) !== undefined);
+}
+
 $.Class('ElementParser', {
 	getContent: function(element, subcontent) {
 		
@@ -28,7 +38,7 @@ $.Class('Theme', {
 	 * Parses the given content into plain html, css and javascript.
 	 */
 	parse: function(data) {
-		this.code = $.parseHTML("<div>"+data+"</div>");
+		this.code = '<div class="--ui-generic">'+data+'</div>';
 		var content = "";
 		$.each($(this.code), function(index, elem) {
 			content += this.parseElement(elem);
@@ -51,7 +61,7 @@ $.Class('Theme', {
 		if (this.elementParser[tagName] != null) {
 			return this.elementParser[tagName].getContent(element, content);
 		}
-		return content;
+		return element.outerHTML();
 	}
 	
 });
@@ -63,6 +73,7 @@ $.Class('Gui', {
 	templates: {},
 	theme: null,
 	currentSections: {},
+	variables: {},
 		
 	init: function(bodySelector) {
 		if (bodySelector != undefined) this.bodySelector = bodySelector;
@@ -76,16 +87,28 @@ $.Class('Gui', {
 	},
 		
 	displayResponseResult: function(response) {
+		this.variables = this.getTemplateVariables();
+		$.each(response.getTemplateVariables(), function(name, value) {this.variables[name] = value;}.bind(this));
 		$.each(response.templateSections, function(section, template) {
-			var resultText = this.compile(this.getTemplate(template), response.getTemplateVariables());
+			var resultText = this.getCompiledTemplate(template);
 			$('#'+section).html(resultText);
 			this.theme.affect('#'+section);
 		}.bind(this));
+	},
+	
+	getTemplateVariables: function() {
+		return {
+			gui: this
+		};
 	},
 
 	getTemplate: function(templateName) {
 		if (this.templates[templateName] == undefined) this.loadTemplate(templateName);
 		return this.templates[templateName];
+	},
+	
+	getCompiledTemplate: function(templateName) {
+		return this.compile(this.getTemplate(templateName), this.variables);
 	},
 
 	loadTemplate: function(templateName) {
@@ -98,12 +121,9 @@ $.Class('Gui', {
 	},
 	
 	compile: function(template, variables) {
-		console.log("compile: "+template);
 		var tempFn = doT.template(template);
 		var resultText = tempFn(variables);
-		console.log("compile: "+resultText);
 		resultText = this.theme.parse(resultText);
-		console.log("compile: "+resultText);
 		return resultText;
 	}
 		
@@ -140,6 +160,7 @@ Request('ControllerRequest', {
 	baseUrl: 'http://localhost:8084/TSN/',
 		
 	init: function(controllerName) {
+		if (controllerName.substring(0, 4) == 'http') controllerName = controllerName.substring(this.baseUrl.length, controllerName.length-'Controller'.length);
 		this._super(this.baseUrl+controllerName+'Controller');
 	},
 		
@@ -195,7 +216,6 @@ Response('ControllerResponse', {
 	},
 	
 	display: function() {
-		console.log("display response");
 		gui.displayResponseResult(this);
 	},
 

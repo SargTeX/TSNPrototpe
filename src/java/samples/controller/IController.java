@@ -20,5 +20,10 @@ public interface IController {
 	public boolean hasError();
 	public IController addError(String error);
 	public String getResponse();
+	public IController setMethod(String method);
+	public String getMethod();
+	public IController processRequest();
+	
+	public IController set(String name, Object value);
 	
 }

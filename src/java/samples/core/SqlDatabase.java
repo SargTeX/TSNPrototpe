@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package samples.data;
+package samples.core;
 
 import java.sql.*;
 import samples.util.DebugUtil;
@@ -43,19 +43,12 @@ public class SqlDatabase {
 	 * 
 	 * @return the connection
 	 */
-	protected Connection getConnection() {
-		try {
-			if (connection == null || connection.isClosed()) {
-				connection = DriverManager.getConnection("jdbc:mysql://" + host + "/" + databaseName, username, password);
-			}
-			
-			return connection;
-		} catch (SQLException ex) {
-			DebugUtil.log(ex);
+	protected Connection getConnection() throws SQLException {
+		if (connection == null || connection.isClosed()) {
+			connection = DriverManager.getConnection("jdbc:mysql://" + host + "/" + databaseName, username, password);
 		}
-		
-		// error occured - return null
-		return null;
+			
+		return connection;
 	}
 
 	/**
