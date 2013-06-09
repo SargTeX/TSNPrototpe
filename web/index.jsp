@@ -2,17 +2,25 @@
 	<head>
 		
 		<!-- JavaScript includes -->
-		<script type="text/javascript" src="js/util/String.js"></script>
-		
-		<script type="text/javascript" src="js/3rdParty/doT.js"></script>
 		<script type="text/javascript" src="js/3rdParty/jquery.js"></script>
 		<script type="text/javascript" src="js/3rdParty/jquery.class.js"></script>
-		<script type="text/javascript" src="js/3rdParty/jquery.ui.js"></script>
-		<script type="text/javascript" src="js/3rdParty/jquery.formLabels.js"></script>
-		<script type="text/javascript" src="js/3rdParty/jquery.form.js"></script>
 		<script type="text/javascript" src="js/framework.js"></script>
-		<script type="text/javascript" src="js/ui/theme.jqueryui.js"></script>
+		
 		<link rel="stylesheet" href="css/ui-lightness/jquery.ui.css" />
+		
+		<script type="text/javascript">
+			core.load([
+				'util/String',
+				'3rdParty/doT',
+				'3rdParty/jquery.ui',
+				'3rdParty/jquery.formLabels',
+				'3rdParty/jquery.form',
+				'util/Gui',
+				'util/jquery',
+				'util/Request'
+			]);
+			core.loadTheme('ui/theme.jqueryui', function() {return new JQueryUiTheme();});
+		</script>
 	</head>
 	<body>
 		<script type="text/javascript">

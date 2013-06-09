@@ -1,3 +1,3 @@
 <div id="menu">
-	{{=gui.getCompiledTemplate("mainMenu")}}
+	{{=core.getGui().getCompiledTemplate("mainMenu")}}
 </div>

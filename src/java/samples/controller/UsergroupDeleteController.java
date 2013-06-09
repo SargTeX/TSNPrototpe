@@ -28,7 +28,7 @@ public class UsergroupDeleteController extends Controller {
 	
 	@Override
 	public void readParameters() {
-		this.usergroupId = Integer.parseInt(this.getParam("usergroupId"));
+		if (this.hasParam("usergroupId")) this.usergroupId = Integer.parseInt(this.getParam("usergroupId"));
 	}
 	
 	@Override

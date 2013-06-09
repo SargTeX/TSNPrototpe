@@ -1,18 +1,4 @@
-(function($) {
-    $.fn.getAttributes = function() {
-        var attributes = {}; 
-
-        if( this.length ) {
-            $.each( this[0].attributes, function( index, attr ) {
-                attributes[ attr.name ] = attr.value;
-            } ); 
-        }
-
-        return attributes;
-    };
-})(jQuery);
-
-Theme('JQueryUITheme', {
+Theme('JQueryUiTheme', {
 	
 	init: function() {
 		this.addElementParser('DIV', new DivElementParser());
@@ -76,7 +62,3 @@ ElementParser('MenuElementParser', {
 		return content;
 	}
 });
-
-
-
-gui.theme = new JQueryUITheme();
