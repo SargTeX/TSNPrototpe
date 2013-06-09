@@ -31,7 +31,16 @@ public class User implements IDataModel {
 	public String getPrename() {return this.prename;}
 	public String getSurname() {return this.surname;}
 	public boolean exists() {return this.existing;}
+	public int getUsergroupId() throws SQLException {
+		String query = "SELECT usergroup.id FROM usergroup, userlist, user_to_userlist WHERE user_to_userlist.userId = ? AND userlist.id = user_to_userlist.userId AND userlist.objectType = 'usergroup' AND userlist.objectId = usergroup.id LIMIT 1";
+		ResultSet rs = SqlDatabase.getInstance().fetch(query, id+"");
+		if (rs.first()) {
+			return rs.getInt("usergroup.id");
+		}
+		return 0;
+	}
 	
+	public User setId(int id) {this.id = id; return this;}
 	public User setUsername(String username) {this.username = username; return this;}
 	public User setPassword(String password) {this.password = password; return this;}
 	public User setEmail(String email) {this.email = email; return this;}

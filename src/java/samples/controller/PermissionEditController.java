@@ -57,6 +57,8 @@ public class PermissionEditController extends Controller {
 	@Override
 	public void save() {
 		this.permission.setDescription(description).setDefaultValue(defaultValue).setType(type);
+		
+		// TODO Standard-Wert validieren (falsch z.B. "2" bei boolean)
 		try {
 			this.permission.update();
 		} catch (SQLException ex) {
@@ -74,9 +76,9 @@ public class PermissionEditController extends Controller {
 	public void assignVariables() {
 		set("action", "edit");
 		set("name", name);
-		set("description", description);
-		set("defaultValue", defaultValue);
-		set("type", type);
+		set("description", permission.getDescription());
+		set("defaultValue", permission.getDefaultValue());
+		set("type", permission.getType());
 	}
 	
 }

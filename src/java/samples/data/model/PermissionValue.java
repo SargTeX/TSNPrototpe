@@ -17,7 +17,7 @@ public class PermissionValue implements IDataModel {
 	
 	private int id;
 	private String value;
-	private String permission;
+	private String permissionName;
 	private int objectId;
 	private String objectType;
 	private boolean existing = false;
@@ -29,10 +29,20 @@ public class PermissionValue implements IDataModel {
 	private void initialize(ResultSet rs) throws SQLException {
 		id = rs.getInt("id");
 		value = rs.getString("value");
-		permission = rs.getString("permission");
+		permissionName = rs.getString("permissionName");
 		objectId = rs.getInt("objectId");
 		objectType = rs.getString("objectType");
 	}
+	
+	public int getId() {return this.id;}
+	public String getValue() {return this.value;}
+	public String getPermissionName() {return this.permissionName;}
+	public int getObjectId() {return this.objectId;}
+	public String getObjectType() {return this.objectType;}
+	public PermissionValue setValue(String value) {this.value = value; return this;}
+	public PermissionValue setPermissionName(String permissionName) {this.permissionName = permissionName; return this;}
+	public PermissionValue setObjectId(int objectId) {this.objectId = objectId; return this;}
+	public PermissionValue setObjectType(String objectType) {this.objectType = objectType; return this;}
 	
 	public static PermissionValue find(String clause, String... parameters) throws SQLException {
 		String query = "SELECT * FROM permission_value";
@@ -47,8 +57,8 @@ public class PermissionValue implements IDataModel {
 
 	@Override
 	public PermissionValue create() throws SQLException {
-		String query = "INSERT INTO permission_value (value, permission, objectId, objectType) VALUES (?, ?, ?, ?)";
-		this.id = SqlDatabase.getInstance().execute(query, value, permission, objectId, objectType);
+		String query = "INSERT INTO permission_value (value, permissionName, objectId, objectType) VALUES (?, ?, ?, ?)";
+		this.id = SqlDatabase.getInstance().execute(query, value, permissionName, objectId, objectType);
 		return this;
 	}
 
@@ -72,8 +82,8 @@ public class PermissionValue implements IDataModel {
 
 	@Override
 	public PermissionValue update() throws SQLException {
-		String query = "UPDATE permission_value SET value = ?, permission = ?, objectId = ?, objectType = ? WHERE id = ?";
-		SqlDatabase.getInstance().execute(query, value, permission, objectId, objectType, id);
+		String query = "UPDATE permission_value SET value = ?, permissionName = ?, objectId = ?, objectType = ? WHERE id = ?";
+		SqlDatabase.getInstance().execute(query, value, permissionName, objectId, objectType, id);
 		return this;
 	}
 
@@ -82,7 +92,7 @@ public class PermissionValue implements IDataModel {
 		String query = "CREATE TABLE permission_value ("
 				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ "value TEXT,"
-				+ "permission VARCHAR( 255 ) NOT NULL,"
+				+ "permissionName VARCHAR( 255 ) NOT NULL,"
 				+ "objectId INT( 11 ) NOT NULL,"
 				+ "objectType VARCHAR( 255 ) NOT NULL)";
 		SqlDatabase.getInstance().execute(query);

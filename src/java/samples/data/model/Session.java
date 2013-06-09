@@ -17,6 +17,7 @@ public class Session implements IDataModel{
 	//<editor-fold defaultstate="collapsed" desc="Attributes">
 	private String sessionId;
 	private int userId;
+	private User user;
 	private static Session instance;
 	private boolean existing = false;
 	//</editor-fold>
@@ -41,6 +42,11 @@ public class Session implements IDataModel{
 	
 	public static Session getInstance() {
 		return instance;
+	}
+	
+	public User getUser() throws SQLException {
+		if (this.user == null) this.user = new User().setId(this.userId).read();
+		return this.user;
 	}
 	
 	@Override

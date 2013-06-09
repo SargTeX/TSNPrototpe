@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import samples.core.SqlDatabase;
+import samples.exception.PermissionDeniedException;
 
 /**
  *
@@ -49,9 +50,25 @@ public class Permission implements IDataModel {
 		this.value = PermissionValue.find("id = ? AND type = ?", id+"", type);
 	}
 	
-	public static Permission get(String name) throws SQLException {
+	public static Permission get(String name) throws SQLException { // TODO caching - if updated then reload (events)
 		ResultSet rs = SqlDatabase.getInstance().fetch("SELECT * FROM permission WHERE name = ?", name);
 		return new Permission(rs);
+	}
+	
+	public static void check(String name) throws PermissionDeniedException, SQLException {
+		Permission permission = new Permission().setName(name).read();
+		if (!permission.exists() || !permission.getType().equals("boolean") || permission.getDefaultValue().equals("1")) return;
+		
+		// get value
+		PermissionValue value = PermissionValue.find("permissionName = ? AND objectId = ? AND objectType = 'user'", name, Session.getInstance().getUserId()+"");
+		if (value == null) value = PermissionValue.find("permissionName = ? AND objectId = ? AND objectType = 'usergroup'", name, Session.getInstance().getUser().getUsergroupId()+"");
+		if (value == null || !value.getValue().equals("1")) throw new PermissionDeniedException("Missing permission: "+name);
+	}
+	
+	public static String getValue(String name, int id, String type) throws SQLException {
+		PermissionValue value = PermissionValue.find("objectId = ? AND type = ? AND name = ?", id+"", type, name);
+		if (value != null) return value.getValue();
+		return Permission.get(name).getDefaultValue();
 	}
 	
 	public static PermissionValue[] getValues(int id, String type) throws SQLException {
