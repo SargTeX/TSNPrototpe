@@ -40,6 +40,22 @@
         <servlet-name>UsergroupEditController</servlet-name>
         <servlet-class>samples.controller.UsergroupEditController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PermissionListController</servlet-name>
+        <servlet-class>samples.controller.PermissionListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PermissionDeleteController</servlet-name>
+        <servlet-class>samples.controller.PermissionDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PermissionAddController</servlet-name>
+        <servlet-class>samples.controller.PermissionAddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PermissionEditController</servlet-name>
+        <servlet-class>samples.controller.PermissionEditController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserToUserlistController</servlet-name>
         <url-pattern>/AddUserToUserlistController</url-pattern>
@@ -79,6 +95,22 @@
     <servlet-mapping>
         <servlet-name>UsergroupEditController</servlet-name>
         <url-pattern>/UsergroupEditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PermissionListController</servlet-name>
+        <url-pattern>/PermissionListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PermissionDeleteController</servlet-name>
+        <url-pattern>/PermissionDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PermissionAddController</servlet-name>
+        <url-pattern>/PermissionAddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PermissionEditController</servlet-name>
+        <url-pattern>/PermissionEditController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

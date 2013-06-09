@@ -1,3 +1,7 @@
 td {
 	border: 1px solid;
 }
+
+#header, #content, #footer {
+	clear: both
+}

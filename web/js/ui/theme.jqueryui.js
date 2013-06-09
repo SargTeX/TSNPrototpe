@@ -9,7 +9,7 @@ Theme('JQueryUiTheme', {
 	
 	affect: function(section) {
 		$.fn.formLabels();
-		$('.menu').menu();
+		$('ul.menu').filter(":parents(.menu)").addClass('sf-menu').superfish();
 		$('a').click(function() {
 			var link = $(this).attr('href');
 			new ControllerRequest(link).execute();
@@ -59,7 +59,11 @@ ElementParser('MenuElementParser', {
 		var content = "<ul class='menu'>";
 		$.each(element.children(), function(index, child) {
 			child = $(child);
-			content += "<li><a href='"+new ControllerRequest(child.attr('controller')).getUrl()+"'>"+child.text()+"</a></li>";
+			content += "<li><a href='"+new ControllerRequest(child.attr('controller')).getUrl()+"'>";
+			content += (child.hasAttr('label')) ? child.attr('label') : child.text();
+			content += "</a>";
+			if (child.children('menu').length > 0) content += this.getContent(child.children("menu"));
+			content += "</li>";
 		}.bind(this));
 		content += "</ul>";
 		return content;

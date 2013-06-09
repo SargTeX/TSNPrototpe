@@ -6,7 +6,8 @@
 		<script type="text/javascript" src="js/3rdParty/jquery.class.js"></script>
 		<script type="text/javascript" src="js/framework.js"></script>
 		
-		<link rel="stylesheet" href="css/ui-lightness/jquery.ui.css" />
+		<link rel="stylesheet" href="css/3rdParty/ui-lightness/jquery.ui.css" />
+		<link rel="stylesheet" href="css/3rdParty/superfish.css" />
 		<link rel="stylesheet" href="css/basic.css" />
 		
 		<script type="text/javascript">
@@ -16,6 +17,7 @@
 				'3rdParty/jquery.ui',
 				'3rdParty/jquery.formLabels',
 				'3rdParty/jquery.form',
+				'3rdParty/jquery.superfish',
 				'util/Gui',
 				'util/jquery',
 				'util/Request'
@@ -31,8 +33,8 @@
 			});
 		</script>
 		
-		<div id="header"></div>
-		<div id="content"></div>
-		<div id="footer"></div>
+		<p><div id="header"></div></p>
+		<p><div id="content"></div></p>
+		<p><div id="footer"></div></p>
 	</body>
 </html>

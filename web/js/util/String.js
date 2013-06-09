@@ -6,3 +6,7 @@ String.prototype.endsWith = function(pattern) {
 String.prototype.contains = function(pattern) {
 	return this.indexOf(pattern) !== -1;
 };
+
+String.prototype.ucfirst = function() {
+	return this.charAt(0).toUpperCase() + this.substr(1);
+};

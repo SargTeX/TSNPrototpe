@@ -29,6 +29,7 @@ Request('ControllerRequest', {
 	baseUrl: 'http://localhost:8084/TSN/',
 		
 	init: function(controllerName) {
+		if (controllerName == undefined) controllerName = '';
 		if (controllerName.substring(0, 4) == 'http') controllerName = controllerName.substring(this.baseUrl.length, controllerName.length-'Controller'.length);
 		if (!controllerName.contains("?") && !controllerName.endsWith('Controller')) controllerName += 'Controller';
 		this._super(this.baseUrl+controllerName);

@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import samples.data.model.Permission;
-import samples.data.model.Usergroup;
 import samples.util.DebugUtil;
 import samples.util.StringUtil;
 
@@ -22,27 +21,26 @@ import samples.util.StringUtil;
  *
  * @author SargTeX
  */
-public class UsergroupEditController extends Controller {
+public class PermissionEditController extends Controller {
 	
-	private Usergroup group;
 	private String name;
 	private String description;
-	private Permission[] permissions;
+	private String defaultValue;
+	private String type;
+	private Permission permission;
 	
 	@Override
 	public void readParameters() {
-		if (this.hasParam("id")) this.group = new Usergroup().setId(Integer.parseInt(this.getParam("id")));
 		this.name = this.getParam("name");
 		this.description = this.getParam("description");
+		this.defaultValue = this.getParam("defaultValue");
+		this.type = this.getParam("type");
 	}
 	
 	@Override
 	public void readData() {
 		try {
-			if (this.group != null) {
-				group.read();
-				permissions = Permission.getPermissions(group.getId(), "usergroup");
-			}
+			this.permission = new Permission().setName(name).read();
 		} catch (SQLException ex) {
 			this.addError(ex);
 			DebugUtil.log(ex);
@@ -51,14 +49,16 @@ public class UsergroupEditController extends Controller {
 	
 	@Override
 	public void validate() {
-		if (!this.group.exists()) this.addError("input.id.wrong");
 		if (StringUtil.isEmpty(name)) this.addError("input.name.empty");
+		else if (!this.permission.exists()) this.addError("input.name.wrong");
+		if (StringUtil.isEmpty(type)) this.addError("input.type.empty");
 	}
 	
 	@Override
 	public void save() {
+		this.permission.setDescription(description).setDefaultValue(defaultValue).setType(type);
 		try {
-			group.setName(name).setDescription(description).update();
+			this.permission.update();
 		} catch (SQLException ex) {
 			this.addError(ex);
 			DebugUtil.log(ex);
@@ -67,16 +67,16 @@ public class UsergroupEditController extends Controller {
 	
 	@Override
 	public void assignSections() {
-		this.setTemplate("content", "usergroupAdd");
+		this.setTemplate("content", "permissionAdd");
 	}
 	
 	@Override
 	public void assignVariables() {
-		this.set("id", group.getId());
-		this.set("name", group.getName());
-		this.set("description", group.getDescription());
-		this.set("permissions", permissions);
+		set("action", "edit");
+		set("name", name);
+		set("description", description);
+		set("defaultValue", defaultValue);
+		set("type", type);
 	}
-	
 	
 }

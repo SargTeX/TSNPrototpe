@@ -7,6 +7,7 @@ package samples.data.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import samples.core.SqlDatabase;
+import samples.util.StringUtil;
 
 /**
  *
@@ -20,7 +21,27 @@ public class PermissionValue implements IDataModel {
 	private int objectId;
 	private String objectType;
 	private boolean existing = false;
-
+	
+	public PermissionValue() {}
+	public PermissionValue(ResultSet rs) throws SQLException {
+		this.initialize(rs);
+	}
+	private void initialize(ResultSet rs) throws SQLException {
+		id = rs.getInt("id");
+		value = rs.getString("value");
+		permission = rs.getString("permission");
+		objectId = rs.getInt("objectId");
+		objectType = rs.getString("objectType");
+	}
+	
+	public static PermissionValue find(String clause, String... parameters) throws SQLException {
+		String query = "SELECT * FROM permission_value";
+		if (!StringUtil.isEmpty(clause)) query += " WHERE "+clause;
+		ResultSet rs = SqlDatabase.getInstance().fetch(query, parameters);
+		if (rs.first()) return new PermissionValue(rs);
+		return null;
+	}
+	
 	@Override
 	public boolean exists() {return existing;}
 
@@ -44,10 +65,7 @@ public class PermissionValue implements IDataModel {
 		ResultSet rs = SqlDatabase.getInstance().fetch(query, id+"");
 		if (rs.first()) {
 			existing = true;
-			value = rs.getString("value");
-			permission = rs.getString("permission");
-			objectId = rs.getInt("objectId");
-			objectType = rs.getString("objectType");
+			this.initialize(rs);
 		}
 		return this;
 	}
