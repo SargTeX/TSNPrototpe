@@ -25,5 +25,6 @@ public interface IController {
 	public IController processRequest();
 	
 	public IController set(String name, Object value);
+	public IController setParameter(String name, String value);
 	
 }

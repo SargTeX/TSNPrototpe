@@ -20,6 +20,7 @@ public abstract class Controller extends ServletController {
 	 */
 	private List<String> errorList = new ArrayList<String>();
 	private Map<String, String> templateSections = new HashMap<String, String>();
+	private Map<String, String> parameters = new HashMap<String, String>();
 	protected String method;
 	
 	protected void reset() {
@@ -51,8 +52,17 @@ public abstract class Controller extends ServletController {
 		return JsonUtil.getGson().fromJson(this.getParam(name), classType);
 	}*/
 	
+	public Controller setParameter(String name, String value) {
+		this.parameters.put(name, value);
+		return this;
+	}
+	
 	public boolean hasParam(String name) {
-		return false;
+		return parameters.containsKey(name);
+	}
+	
+	public String getParam(String name) {
+		return parameters.get(name);
 	}
 	
 	public Controller addError(String error) {

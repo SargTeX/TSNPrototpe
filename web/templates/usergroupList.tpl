@@ -18,7 +18,7 @@
 				<td>{{=group.description}}</td>
 				<td>{{=group.userCount}}</td>
 				<td><a href='UsergroupEditController?id={{=group.id}}'>Edit</a></td>
-				<td><a href='UsergroupDeleteController?id={{=group.id}}'>Delete</a></td>
+				<td><a class="delete" href='UsergroupDeleteController?id={{=group.id}}'>Delete</a></td>
 			</tr>
 		{{~}}
 	</tbody>

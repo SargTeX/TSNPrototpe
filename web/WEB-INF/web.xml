@@ -36,6 +36,10 @@
         <servlet-name>UsergroupDeleteController</servlet-name>
         <servlet-class>samples.controller.UsergroupDeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UsergroupEditController</servlet-name>
+        <servlet-class>samples.controller.UsergroupEditController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserToUserlistController</servlet-name>
         <url-pattern>/AddUserToUserlistController</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>UsergroupDeleteController</servlet-name>
         <url-pattern>/UsergroupDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsergroupEditController</servlet-name>
+        <url-pattern>/UsergroupEditController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

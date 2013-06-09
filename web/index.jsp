@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="js/framework.js"></script>
 		
 		<link rel="stylesheet" href="css/ui-lightness/jquery.ui.css" />
+		<link rel="stylesheet" href="css/basic.css" />
 		
 		<script type="text/javascript">
 			core.load([

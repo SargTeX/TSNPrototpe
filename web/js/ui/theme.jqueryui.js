@@ -13,6 +13,9 @@ Theme('JQueryUiTheme', {
 		$('a').click(function() {
 			var link = $(this).attr('href');
 			new ControllerRequest(link).execute();
+			if ($(this).hasClass('delete')) {
+				$(this).parents('tr').fadeOut();
+			}
 			return false;
 		});
 		$('form').ajaxForm();

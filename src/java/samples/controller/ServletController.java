@@ -28,10 +28,6 @@ public abstract class ServletController extends HttpServlet implements IControll
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	
-	public String getParam(String name) {
-		return request.getParameter(name);
-	}
-	
 	protected abstract void reset();
 	
 	/**
@@ -58,6 +54,11 @@ public abstract class ServletController extends HttpServlet implements IControll
 		} catch (SQLException ex) {
 			this.addError("Could not initialize Session, exception: "+ex.getMessage());
 			DebugUtil.log(ex);
+		}
+		
+		// set all parameters
+		for (String key : request.getParameterMap().keySet()) {
+			this.setParameter(key, request.getParameter(key));
 		}
 		
 		// do lifecycle

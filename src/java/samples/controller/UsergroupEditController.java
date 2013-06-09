@@ -1,4 +1,4 @@
- /*
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -21,37 +21,56 @@ import samples.util.StringUtil;
  *
  * @author SargTeX
  */
-public class UsergroupDeleteController extends Controller {
+public class UsergroupEditController extends Controller {
 	
-	private int usergroupId;
 	private Usergroup group;
+	private String name;
+	private String description;
 	
 	@Override
 	public void readParameters() {
-		if (this.hasParam("id")) this.usergroupId = Integer.parseInt(this.getParam("id"));
+		if (this.hasParam("id")) this.group = new Usergroup().setId(Integer.parseInt(this.getParam("id")));
+		this.name = this.getParam("name");
+		this.description = this.getParam("description");
 	}
 	
 	@Override
-	public void validate() {
-		if (usergroupId == 0) this.addError("input.usergroupId.empty");
+	public void readData() {
 		try {
-			group = new Usergroup().setId(usergroupId).read();
+			if (this.group != null) group.read();
 		} catch (SQLException ex) {
 			this.addError(ex);
 			DebugUtil.log(ex);
 		}
-		if (!group.exists()) this.addError("input.usergroupId.wrong");
+	}
+	
+	@Override
+	public void validate() {
+		if (!this.group.exists()) this.addError("input.id.wrong");
+		if (StringUtil.isEmpty(name)) this.addError("input.name.empty");
 	}
 	
 	@Override
 	public void save() {
 		try {
-			group.remove();
-			this.addError("removed");
+			group.setName(name).setDescription(description).update();
 		} catch (SQLException ex) {
 			this.addError(ex);
 			DebugUtil.log(ex);
 		}
 	}
+	
+	@Override
+	public void assignSections() {
+		this.setTemplate("content", "usergroupAdd");
+	}
+	
+	@Override
+	public void assignVariables() {
+		this.set("id", group.getId());
+		this.set("name", group.getName());
+		this.set("description", group.getDescription());
+	}
+	
 	
 }
