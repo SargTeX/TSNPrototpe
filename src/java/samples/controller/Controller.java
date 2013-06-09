@@ -98,11 +98,11 @@ public abstract class Controller extends ServletController {
 	@Override
 	public Controller processRequest() {
 		this.readParameters();
-		this.readData();
-		if (this.getMethod().equals("POST")) {
+		this.readData(); // TODO find solution for POST and GET request validation - maybe via own param map and if param exists then validate?
+//		if (this.getMethod().equals("POST")) {
 			this.validate();
 			if (!this.hasError()) this.save();
-		}
+//		}
 		this.assignVariables();
 		this.assignSections();
 		

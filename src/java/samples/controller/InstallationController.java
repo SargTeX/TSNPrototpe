@@ -36,7 +36,7 @@ public class InstallationController extends Controller {
 	@Override
 	public void save() {
 		try {
-			InstallationUtil.uninstall();
+		//	InstallationUtil.uninstall();
 			InstallationUtil.install();
 		} catch (Exception ex) {
 			DebugUtil.log(ex);

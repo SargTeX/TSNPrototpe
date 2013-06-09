@@ -25,19 +25,21 @@ public class PermissionValue implements IDataModel {
 	public boolean exists() {return existing;}
 
 	@Override
-	public void create() throws SQLException {
+	public PermissionValue create() throws SQLException {
 		String query = "INSERT INTO permission_value (value, permission, objectId, objectType) VALUES (?, ?, ?, ?)";
 		this.id = SqlDatabase.getInstance().execute(query, value, permission, objectId, objectType);
+		return this;
 	}
 
 	@Override
-	public void remove() throws SQLException {
+	public PermissionValue remove() throws SQLException {
 		String query = "DELETE FROM permission_value WHERE id = ?";
 		SqlDatabase.getInstance().execute(query, id+"");
+		return this;
 	}
 
 	@Override
-	public void read() throws SQLException {
+	public PermissionValue read() throws SQLException {
 		String query = "SELECT * FROM permission_value WHERE id = ?";
 		ResultSet rs = SqlDatabase.getInstance().fetch(query, id+"");
 		if (rs.first()) {
@@ -47,16 +49,18 @@ public class PermissionValue implements IDataModel {
 			objectId = rs.getInt("objectId");
 			objectType = rs.getString("objectType");
 		}
+		return this;
 	}
 
 	@Override
-	public void update() throws SQLException {
+	public PermissionValue update() throws SQLException {
 		String query = "UPDATE permission_value SET value = ?, permission = ?, objectId = ?, objectType = ? WHERE id = ?";
 		SqlDatabase.getInstance().execute(query, value, permission, objectId, objectType, id);
+		return this;
 	}
 
 	@Override
-	public void install() throws Exception {
+	public PermissionValue install() throws Exception {
 		String query = "CREATE TABLE permission_value ("
 				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ "value TEXT,"
@@ -64,12 +68,14 @@ public class PermissionValue implements IDataModel {
 				+ "objectId INT( 11 ) NOT NULL,"
 				+ "objectType VARCHAR( 255 ) NOT NULL)";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 
 	@Override
-	public void uninstall() throws Exception {
+	public PermissionValue uninstall() throws Exception {
 		String query = "DROP TABLE IF EXISTS permission_value";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 	
 }

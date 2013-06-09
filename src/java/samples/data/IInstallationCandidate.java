@@ -10,7 +10,7 @@ package samples.data;
  */
 public interface IInstallationCandidate {
 	
-	public void install() throws Exception;
-	public void uninstall() throws Exception;
+	public IInstallationCandidate install() throws Exception;
+	public IInstallationCandidate uninstall() throws Exception;
 	
 }

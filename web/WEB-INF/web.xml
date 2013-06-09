@@ -20,6 +20,22 @@
         <servlet-name>InstallationController</servlet-name>
         <servlet-class>samples.controller.InstallationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UserlistListController</servlet-name>
+        <servlet-class>samples.controller.UserlistListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsergroupListController</servlet-name>
+        <servlet-class>samples.controller.UsergroupListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsergroupAddController</servlet-name>
+        <servlet-class>samples.controller.UsergroupAddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UsergroupDeleteController</servlet-name>
+        <servlet-class>samples.controller.UsergroupDeleteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserToUserlistController</servlet-name>
         <url-pattern>/AddUserToUserlistController</url-pattern>
@@ -39,6 +55,22 @@
     <servlet-mapping>
         <servlet-name>InstallationController</servlet-name>
         <url-pattern>/InstallationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserlistListController</servlet-name>
+        <url-pattern>/UserlistListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsergroupListController</servlet-name>
+        <url-pattern>/UsergroupListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsergroupAddController</servlet-name>
+        <url-pattern>/UsergroupAddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsergroupDeleteController</servlet-name>
+        <url-pattern>/UsergroupDeleteController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

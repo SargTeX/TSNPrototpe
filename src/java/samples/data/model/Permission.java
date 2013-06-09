@@ -33,19 +33,21 @@ public class Permission implements IDataModel {
 	public Permission setType(String type) {this.type = type; return this;}
 
 	@Override
-	public void create() throws SQLException {
+	public Permission create() throws SQLException {
 		String query = "INSERT INTO permission (name, description, defaultValue, type) VALUES (?, ?, ?, ?)";
 		SqlDatabase.getInstance().execute(query, name, description, defaultValue, type);
+		return this;
 	}
 
 	@Override
-	public void remove() throws SQLException {
+	public Permission remove() throws SQLException {
 		String query = "DELETE FROM permission WHERE name = ?";
 		SqlDatabase.getInstance().execute(query, name);
+		return this;
 	}
 
 	@Override
-	public void read() throws SQLException {
+	public Permission read() throws SQLException {
 		String query = "SELECT * FROM permission WHERE name = ?";
 		ResultSet rs = SqlDatabase.getInstance().fetch(query, name);
 		if (rs.first()) {
@@ -54,28 +56,32 @@ public class Permission implements IDataModel {
 			this.defaultValue = rs.getString("defaultValue");
 			this.type = rs.getString("type");
 		}
+		return this;
 	}
 
 	@Override
-	public void update() throws SQLException {
+	public Permission update() throws SQLException {
 		String query = "UPDATE permission SET description = ?, defaultValue = ?, type = ? WHERE name = ?";
 		SqlDatabase.getInstance().execute(query, description, defaultValue, type, name);
+		return this;
 	}
 
 	@Override
-	public void install() throws Exception {
+	public Permission install() throws Exception {
 		String query = "CREATE TABLE permission ("
 				+ "name VARCHAR( 255 ) NOT NULL PRIMARY KEY,"
 				+ "description TEXT,"
 				+ "defaultValue TEXT,"
 				+ "type VARCHAR( 255 ) NOT NULL)";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 
 	@Override
-	public void uninstall() throws Exception {
+	public Permission uninstall() throws Exception {
 		String query = "DROP TABLE IF EXISTS permission";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 	
 }

@@ -15,9 +15,9 @@ public interface IDataModel extends IInstallationCandidate {
 	
 	public boolean exists();
 	
-	public void create() throws SQLException;
-	public void remove() throws SQLException;
-	public void read() throws SQLException;
-	public void update() throws SQLException;
+	public IDataModel create() throws SQLException;
+	public IDataModel remove() throws SQLException;
+	public IDataModel read() throws SQLException;
+	public IDataModel update() throws SQLException;
 	
 }

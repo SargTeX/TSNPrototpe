@@ -40,13 +40,14 @@ public class User implements IDataModel {
 	public User setSurname(String surname) {this.surname = surname; return this;}
 	
 	@Override
-	public void create() throws SQLException { // TODO throw exception or not?
+	public User create() throws SQLException { // TODO throw exception or not?
 		id = SqlDatabase.getInstance().execute("INSERT INTO user (username, password, email, birthday, prename, surname) VALUES (?, ?, ?, ?, ?, ?)", username, password, email, birthday, prename, surname);
 		existing = true;
+		return this;
 	}
 	
 	@Override
-	public void install() throws SQLException {
+	public User install() throws SQLException {
 		SqlDatabase.getInstance().execute("CREATE TABLE user ("
 				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ "username VARCHAR( 255 ) NOT NULL,"
@@ -55,20 +56,23 @@ public class User implements IDataModel {
 				+ "birthday INT( 11 ) NOT NULL,"
 				+ "prename VARCHAR( 255 ) NOT NULL,"
 				+ "surname VARCHAR( 255 ) NOT NULL)");
+		return this;
 	}
 
 	@Override
-	public void uninstall() throws SQLException {
+	public User uninstall() throws SQLException {
 		SqlDatabase.getInstance().execute("DROP TABLE IF EXISTS user");
+		return this;
 	}
 
 	@Override
-	public void remove() throws SQLException {
+	public User remove() throws SQLException {
 		SqlDatabase.getInstance().execute("REMOVE FROM user WHERE id = ?", this.id);
+		return this;
 	}
 
 	@Override
-	public void read() throws SQLException {
+	public User read() throws SQLException {
 		ResultSet rs = SqlDatabase.getInstance().fetch("SELECT * FROM user WHERE id = ?", id+"");
 		
 		if (rs.first()) {
@@ -80,12 +84,14 @@ public class User implements IDataModel {
 			this.prename = rs.getString("prename");
 			this.surname = rs.getString("surname");
 		}
+		return this;
 	}
 
 	@Override
-	public void update() throws SQLException {
+	public User update() throws SQLException {
 		SqlDatabase.getInstance().execute("UPDATE user SET username = ?, password = ?, email = ?, birthday = ?, prename = ?, surname = ? WHERE id = ?",
 				username, password, email, birthday, prename, surname, id);
+		return this;
 	}
 	
 }

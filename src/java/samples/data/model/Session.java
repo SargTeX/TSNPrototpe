@@ -44,40 +44,46 @@ public class Session implements IDataModel{
 	}
 	
 	@Override
-	public void create() throws SQLException {
+	public Session create() throws SQLException {
 		SqlDatabase.getInstance().execute("INSERT INTO session (sessionId, userId) VALUES (?, ?)", this.sessionId, this.userId);
 		this.existing = true;
+		return this;
 	}
 
 	@Override
-	public void install() throws Exception {
+	public Session install() throws Exception {
 		SqlDatabase.getInstance().execute("CREATE TABLE session ("
 				+ "sessionId VARCHAR( 255 ) NOT NULL PRIMARY KEY,"
 				+ "userId INT( 11 ) NOT NULL )");
+		return this;
 	}
 
 	@Override
-	public void uninstall() throws Exception {
+	public Session uninstall() throws Exception {
 		SqlDatabase.getInstance().execute("DROP TABLE IF EXISTS session");
+		return this;
 	}
 
 	@Override
-	public void remove() throws SQLException {
+	public Session remove() throws SQLException {
 		SqlDatabase.getInstance().execute("REMOVE FROM session WHERE sessionId = ?", this.sessionId);
+		return this;
 	}
 
 	@Override
-	public void read() throws SQLException {
+	public Session read() throws SQLException {
 		ResultSet rs = SqlDatabase.getInstance().fetch("SELECT * FROM session WHERE sessionId = ?", this.sessionId);
 		if (rs.first()) {
 			this.userId = rs.getInt("userId");
 			this.existing = true;
 		}
+		return this;
 	}
 
 	@Override
-	public void update() throws SQLException {
+	public Session update() throws SQLException {
 		SqlDatabase.getInstance().execute("UPDATE session SET userId = ? WHERE sessionId = ?", this.userId, this.sessionId);
+		return this;
 	}
 	
 }

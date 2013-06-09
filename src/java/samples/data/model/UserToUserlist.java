@@ -29,19 +29,21 @@ public class UserToUserlist implements IDataModel {
 	public boolean exists() {return this.existing;}
 
 	@Override
-	public void create() throws SQLException {
+	public UserToUserlist create() throws SQLException {
 		String query = "INSERT INTO user_to_userlist (userId, userlistId) VALUES (?, ?)";
 		id = SqlDatabase.getInstance().execute(query, userId, userlistId);
+		return this;
 	}
 
 	@Override
-	public void remove() throws SQLException {
+	public UserToUserlist remove() throws SQLException {
 		String query = "DELETE FROM user_to_userlist WHERE id = ?";
 		SqlDatabase.getInstance().execute(query, id+"");
+		return this;
 	}
 
 	@Override
-	public void read() throws SQLException {
+	public UserToUserlist read() throws SQLException {
 		String query = "SELECT * FROM user_to_userlist WHERE id = ?";
 		ResultSet rs = SqlDatabase.getInstance().fetch(query, id+"");
 		if (rs.first()) {
@@ -49,27 +51,31 @@ public class UserToUserlist implements IDataModel {
 			userId = rs.getInt("userId");
 			userlistId = rs.getInt("userlistId");
 		}
+		return this;
 	}
 
 	@Override
-	public void update() throws SQLException {
+	public UserToUserlist update() throws SQLException {
 		String query = "UPDATE user_to_userlist SET userId = ? AND userlistId = ? WHERE id = ?";
 		SqlDatabase.getInstance().execute(query, userId+"", userlistId, id);
+		return this;
 	}
 
 	@Override
-	public void install() throws Exception {
+	public UserToUserlist install() throws Exception {
 		String query = "CREATE TABLE user_to_userlist ("
 				+ "id INT( 11 ) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
 				+ "userId INT( 11 ) NOT NULL,"
 				+ "userlistId INT( 11 ) NOT NULL)";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 
 	@Override
-	public void uninstall() throws Exception {
+	public UserToUserlist uninstall() throws Exception {
 		String query = "DROP TABLE IF EXISTS user_to_userlist";
 		SqlDatabase.getInstance().execute(query);
+		return this;
 	}
 	
 }
