@@ -161,7 +161,8 @@ Request('ControllerRequest', {
 		
 	init: function(controllerName) {
 		if (controllerName.substring(0, 4) == 'http') controllerName = controllerName.substring(this.baseUrl.length, controllerName.length-'Controller'.length);
-		this._super(this.baseUrl+controllerName+'Controller');
+		if (!controllerName.contains("?") && !controllerName.endsWith('Controller')) controllerName += 'Controller';
+		this._super(this.baseUrl+controllerName);
 	},
 		
 	getBaseUrl: function() {

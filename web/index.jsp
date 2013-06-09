@@ -2,6 +2,8 @@
 	<head>
 		
 		<!-- JavaScript includes -->
+		<script type="text/javascript" src="js/util/String.js"></script>
+		
 		<script type="text/javascript" src="js/3rdParty/doT.js"></script>
 		<script type="text/javascript" src="js/3rdParty/jquery.js"></script>
 		<script type="text/javascript" src="js/3rdParty/jquery.class.js"></script>
