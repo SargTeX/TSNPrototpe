@@ -56,6 +56,42 @@
         <servlet-name>PermissionEditController</servlet-name>
         <servlet-class>samples.controller.PermissionEditController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LanguageAddController</servlet-name>
+        <servlet-class>samples.controller.LanguageAddController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageEditController</servlet-name>
+        <servlet-class>samples.controller.LanguageEditController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageDeleteController</servlet-name>
+        <servlet-class>samples.controller.LanguageDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageItemTranslate</servlet-name>
+        <servlet-class>samples.controller.LanguageItemTranslate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageListServlet</servlet-name>
+        <servlet-class>samples.controller.LanguageListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageItemTranslateController</servlet-name>
+        <servlet-class>samples.controller.LanguageItemTranslateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageItemTranslationListController</servlet-name>
+        <servlet-class>samples.controller.LanguageItemTranslationListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageListController</servlet-name>
+        <servlet-class>samples.controller.LanguageListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LanguageItemAddController</servlet-name>
+        <servlet-class>samples.controller.LanguageItemAddController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserToUserlistController</servlet-name>
         <url-pattern>/AddUserToUserlistController</url-pattern>
@@ -111,6 +147,42 @@
     <servlet-mapping>
         <servlet-name>PermissionEditController</servlet-name>
         <url-pattern>/PermissionEditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageAddController</servlet-name>
+        <url-pattern>/LanguageAddController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageEditController</servlet-name>
+        <url-pattern>/LanguageEditController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageDeleteController</servlet-name>
+        <url-pattern>/LanguageDeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageItemTranslate</servlet-name>
+        <url-pattern>/LanguageItemTranslate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageListServlet</servlet-name>
+        <url-pattern>/LanguageListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageItemTranslateController</servlet-name>
+        <url-pattern>/LanguageItemTranslateController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageItemTranslationListController</servlet-name>
+        <url-pattern>/LanguageItemTranslationListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageListController</servlet-name>
+        <url-pattern>/LanguageListController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LanguageItemAddController</servlet-name>
+        <url-pattern>/LanguageItemAddController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

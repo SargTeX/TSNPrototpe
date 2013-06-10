@@ -5,6 +5,9 @@
 package samples.util;
 
 import samples.data.IInstallationCandidate;
+import samples.data.model.Language;
+import samples.data.model.LanguageItem;
+import samples.data.model.LanguageItemTranslation;
 import samples.data.model.Permission;
 import samples.data.model.PermissionValue;
 import samples.data.model.Session;
@@ -22,6 +25,9 @@ public class InstallationUtil {
 	//<editor-fold defaultstate="collapsed" desc="Attributes">
 	private static final String[] classes = new String[] {};
 	private static final IInstallationCandidate[] installationCandidates = new IInstallationCandidate[] {
+		new Language(),
+		new LanguageItem(),
+		new LanguageItemTranslation(),
 		new Permission(),
 		new PermissionValue(),
 		new Session(),

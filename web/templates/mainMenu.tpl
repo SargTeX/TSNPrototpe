@@ -17,5 +17,11 @@
 			<item controller="PermissionAdd">erstellen</item>
 		</menu>
 	</item>
+	<item label="Sprachen">
+		<menu>
+			<item controller="LanguageList">Sprachen auflisten</item>
+			<item controller="LanguageAdd">Sprache erstellen</item>
+		</menu>
+	</item>
 	<item controller="Installation">System neu installieren</item>
 </menu>

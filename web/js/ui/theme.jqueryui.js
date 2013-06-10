@@ -5,6 +5,7 @@ Theme('JQueryUiTheme', {
 		this.addElementParser('FORM', new FormElementParser());
 		this.addElementParser('INPUT', new InputElementParser());
 		this.addElementParser('MENU', new MenuElementParser());
+		this.addElementParser('ROW', new RowElementParser());
 	},
 	
 	affect: function(section) {
@@ -66,6 +67,21 @@ ElementParser('MenuElementParser', {
 			content += "</li>";
 		}.bind(this));
 		content += "</ul>";
+		return content;
+	}
+});
+
+ElementParser('RowElementParser', {
+	getContent: function(element, subcontent) {
+		var content = "<tr>";
+		$.each(element.children('item'), function(index, child) {
+			child = $(child);
+			content += "<td>";
+			var label = (child.hasAttr('value')) ? child.attr('value') : child.text();
+			content += label;
+			content += "</td>";
+		});
+		content += "</tr>";
 		return content;
 	}
 });
